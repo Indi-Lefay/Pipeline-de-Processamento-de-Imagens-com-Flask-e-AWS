@@ -5,20 +5,27 @@ Este projeto implementa um pipeline de processamento de imagens utilizando Flask
 ## Estrutura do Projeto
 
 ```
-image_processing_pipeline/
-├── venv/                      # Ambiente virtual Python
-├── src/                       # Código fonte da aplicação
-│   ├── main.py                # Aplicação Flask principal (API + worker)
-│   ├── routes/                # Rotas da API
-│   ├── models/                # Modelos de dados
-│   └── static/                # Arquivos estáticos
-├── docker-compose.yml         # Configuração do LocalStack
-├── requirements.txt           # Dependências do projeto
-├── setup_aws_resources.py     # Script para criar recursos AWS no LocalStack
-├── start_localstack.sh        # Script para iniciar o LocalStack
-├── start_app.sh               # Script para iniciar a aplicação Flask
-├── create_test_image.py       # Script para criar imagem de teste
-└── test_upload.sh             # Script para testar o upload de imagem
+Pipeline-de-Processamento-de-Imagens-com-Flask-e-AWS/
+├── templates/                   # Templates HTML, se houver
+│   └── index.html               # Exemplo de página (se usado Flask frontend)
+├── .gitignore                   # Ignorar venv, __pycache__, etc.
+├── README.md                    # Documentação
+├── docker-compose.yml           # Arquitetura com LocalStack e Flask
+├── app/                          # Código principal da aplicação
+├── image.png                    # Exemplo de imagem para testes
+├── image_processor.py       # Processamento de imagem com OpenCV
+├── main.py                      # Arquivo principal que chama o app Flask
+├── requirements.txt             # Dependências do projeto
+├── routes.py                # Rotas da API
+├── s3_service.py            # Interação com S3 (LocalStack ou AWS)
+├── setup_aws_resources.py   # Criação de buckets e filas
+├── sqs_service.py           # Interação com filas SQS
+├── __init__.py              # Inicialização da app Flask
+├── start_app.sh             # Script para iniciar o app
+├── start_localstack.sh      # Script para iniciar o LocalStack
+├── test_upload.sh           # Script de teste de envio│   
+├── worker.py                # Consumidor das mensagens SQS   
+
 ```
 
 ## Requisitos
@@ -84,17 +91,6 @@ A aplicação estará disponível em `http://localhost:5000`.
    - Salva a imagem processada no bucket S3 `image-processed`
    - Envia mensagem para a fila SQS `new-image-processed.fifo`
 
-## Testando o Pipeline
-
-1. **Criar Imagem de Teste**:
-```bash
-python create_test_image.py
-```
-
-2. **Testar o Upload**:
-```bash
-./test_upload.sh
-```
 
 ## Detalhes da Implementação
 
