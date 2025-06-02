@@ -5,4 +5,4 @@ source venv/bin/activate
 
 # Iniciar a aplicação Flask
 echo "Iniciando a aplicação Flask..."
-python src/main.py
+python main.py
